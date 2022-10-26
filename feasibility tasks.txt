@@ -1,0 +1,14 @@
+Inputs:
+>Read Files
+>Standing Data
+Logic:
+>Down Feasibility
+>Down Reserves
+>Up Feasibility
+	>
+	
+>Up Reserves
+
+>Output
+XML
+
