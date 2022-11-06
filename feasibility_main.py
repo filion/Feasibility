@@ -5,7 +5,7 @@ if __name__== "__main__":
     # import requests
     import pandas as pd
     import numpy as np
-
+    from tkinter.filedialog import askopenfilename
     # from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
     try:
         registry = pd.read_excel(r'./registry.xlsx', sheet_name=None)
@@ -47,14 +47,41 @@ if __name__== "__main__":
         # print(sub_df)
         req_dict[sub_df.columns.name]=sub_df
 
-
+    # print(utc_timeseries)
     for entity in req_dict['Mandatory Hydro'].iterrows():
         # TODO Write properly the entity
         name = entity[0][1]
-        print(entity[1])
+
         if name in hydro_entities.keys():
-            hydro_entities[name].market_schedule = entity[1].loc[timeseries_dict]
-    # print(req_dict['Mandatory Hydro'].loc[:, utc_timeseries])
+            hydro_entities[name].mandatory_hydro_schedule = entity[1].loc[utc_timeseries]
+            # print(hydro_entities[name].mandatory_hydro_schedule)
+    """
+    Read Unit Availabilities
+    """
+    # try:
+    labels = ['Workspace', 'Start Date', 'Stop Date', 'Schedule Type',
+              'Identification', 'Document Version', 'Document Identification',
+              'Document Timestamp', 'Sender', 'Creation Time', 'Version', 'Origin', 'Status', 'Value Type']
+    filepath = askopenfilename()
+    print((hydro_entities)
+    max_availability_pd = pd.read_excel(filepath)
+    max_availability_pd.drop(labels, axis=1, inplace=True)
+    max_availability_pd.rename(columns=timeseries_dict, inplace=True)
+    for entity in req_dict['Mandatory Hydro'].iterrows():
+        # TODO Write properly the entity
+        name = entity[0][1]
+        print(name)
+        # try:
+       # test.isin(req_dict.loc['Mandatory Hydro'])
+        if test.loc[:, 'Resource Object'].isin(list(name)).any():
+            print(name)
+            test[name].maximum_availability = entity.loc[:, utc_timeseries]
+            print(test[name].maximum_availability)
+            # except:
+            #     print('blah')
+
+    # except:
+    #     print('problem reading file')
 
 # for i,v in req_dict.items():
     # print(i)
