@@ -8,6 +8,7 @@ import numpy as np
 import msvcrt as m
 
 
+
 def wait():
     m.getch()
 
@@ -15,7 +16,7 @@ def wait():
 def create_entities(reg):
 
     thermal_entities_df = reg[reg.loc[:, 'Type'] == 'THERMAL']
-    hydro_entites_df = reg[reg.loc[:, 'Type'] == 'HYDRO']
+    hydro_entities_df = reg[reg.loc[:, 'Type'] == 'HYDRO']
 
     thermal_entities_dictionary = {}
     hydro_entities_dictionary = {}
@@ -24,7 +25,7 @@ def create_entities(reg):
         entity = cl.BaseEntity(v['ENTITY'], v['Type'])
         thermal_entities_dictionary[v['ENTITY']] = entity
 
-    for i, v in hydro_entites_df.iterrows():
+    for i, v in hydro_entities_df.iterrows():
         entity = cl.BaseEntity(v['ENTITY'], v['Type'])
         hydro_entities_dictionary[v['ENTITY']] = entity
 
